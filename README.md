@@ -5,8 +5,8 @@ A simple Cakephp ACL based authentication plugin
 
 Prerequisite
 ============
-1.Plugin AclExtras
-2.jQuery library enabled in layout
+1. Plugin AclExtras
+2. jQuery library enabled in layout
 
 Installation
 ============
