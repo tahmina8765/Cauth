@@ -9,7 +9,8 @@ App::uses('CauthAppModel', 'Cauth.Model');
  */
 class Group extends CauthAppModel {
 
-    var $useTable = 'groups';
+    public $useTable = 'cauth_groups';
+
 
     /**
      * Validation rules

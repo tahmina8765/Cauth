@@ -9,13 +9,15 @@ App::uses('CauthAppModel', 'Cauth.Model');
  */
 class User extends CauthAppModel {
 
+    public $useTable = 'cauth_users';
+
     /**
      * Validation rules
      *
      * @var array
      *
      */
-    var $name = 'User';
+    public $name = 'User';
     public $validate = array (
         'username' => array (
             'notempty' => array (

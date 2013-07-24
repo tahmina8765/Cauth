@@ -9,7 +9,7 @@ App::uses('CauthAppModel', 'Cauth.Model');
  */
 class Category extends CauthAppModel {
 
-    public $useTable = "cauth_categories";
+    public $useTable = 'cauth_categories';
 
     /**
      * Display field
