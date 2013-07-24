@@ -111,6 +111,10 @@ class UsersController extends CauthAppController {
 
     }
 
+    /**
+     *  login method
+     */
+
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
@@ -126,9 +130,85 @@ class UsersController extends CauthAppController {
 
     }
 
+    /**
+     * logout method
+     */
+
     public function logout() {
         $this->Session->setFlash(__('You have successfully logged out from the system.'));
         $this->redirect($this->Auth->logout());
+
+    }
+
+    /**
+     *
+     * @param type $id
+     * @throws NotFoundException
+     */
+
+    public function changePassword($id = null) {
+        $this->User->validate['cpassword'] = array (
+            'notempty'  => array (
+                'rule' => array ('notempty'),
+            ),
+            'cpassword' => array (
+                'rule'    => array ('cpassword'),
+                'message' => 'Invalid current password',
+            )
+        );
+
+        $this->User->validate['password'] = array (
+            'notempty'  => array (
+                'rule' => array ('notempty'),
+            ),
+            'minLength' => array (
+                'rule'    => array ('minLength', 6),
+                'message' => 'Password must be min 6 char long'
+            ),
+            'identitcalpassword' => array (
+                'rule'    => array ('identitcalpassword'),
+                'message' => 'You are already using this password',
+            )
+        );
+
+        $this->User->validate['rpassword'] = array (
+            'notempty'  => array (
+                'rule' => array ('notempty'),
+            ),
+            'rpassword' => array (
+                'rule'    => array ('rpassword'),
+                'message' => 'Re-type password does not match',
+            )
+        );
+
+        /**
+         * Check this user is valid to chnage password
+         * Rule 1: Admin is allowed to change anyone password
+         * Rule 2: Only own password will be change for other types of user
+         */
+        $current_user_group_id = $this->Session->read('Auth.User.group_id');
+        if($current_user_group_id != '1' || empty($id)){
+            $id = $this->Session->read('Auth.User.id');
+        }
+
+
+
+        if (!$this->User->exists($id)) {
+            throw new NotFoundException(__('Invalid user'));
+        }
+        if ($this->request->is('post') || $this->request->is('put')) {
+
+            if ($this->User->save($this->request->data)) {
+                $this->Session->setFlash(__('Password has changed successfully.'), 'success');
+                $this->redirect(array ('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('Password could not be changed. Please, try again.'), 'error');
+            }
+        } else {
+            $options                                 = array ('conditions' => array ('User.' . $this->User->primaryKey => $id));
+            $this->request->data                     = $this->User->find('first', $options);
+            $this->request->data['User']['password'] = '';
+        }
 
     }
 

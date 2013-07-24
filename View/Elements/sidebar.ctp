@@ -19,6 +19,11 @@
         <li><?php echo $this->Html->link(__('List Users'), array ('plugin'     => 'cauth', 'controller' => 'users', 'action'     => 'index')); ?></li>
     </ul>
 
+    <h3><?php echo __('User'); ?></h3>
+    <ul>
+        <li><?php echo $this->Html->link(__('Change Password'), array ('plugin'     => 'cauth', 'controller' => 'users', 'action'     => 'changePassword')); ?></li>
+    </ul>
+
     <h3><?php echo __('Access Control'); ?></h3>
     <ul>
         <li><?php echo $this->Html->link(__('Permission'), array ('plugin'     => 'cauth', 'controller' => 'utils', 'action'     => 'index')); ?></li>

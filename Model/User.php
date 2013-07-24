@@ -6,10 +6,6 @@ App::uses('CauthAppModel', 'Cauth.Model');
  * User Model
  *
  * @property Group $Group
- * @property ActivityLog $ActivityLog
- * @property Commissioner $Commissioner
- * @property LicensedIndividual $LicensedIndividual
- * @property WorkItem $WorkItem
  */
 class User extends CauthAppModel {
 
@@ -70,67 +66,6 @@ class User extends CauthAppModel {
         )
     );
 
-    /**
-     * hasMany associations
-     *
-     * @var array
-     */
-    /*
-    public $hasMany = array (
-        'ActivityLog'        => array (
-            'className'    => 'ActivityLog',
-            'foreignKey'   => 'user_id',
-            'dependent'    => false,
-            'conditions'   => '',
-            'fields'       => '',
-            'order'        => '',
-            'limit'        => '',
-            'offset'       => '',
-            'exclusive'    => '',
-            'finderQuery'  => '',
-            'counterQuery' => ''
-        ),
-        'Commissioner'       => array (
-            'className'    => 'Commissioner',
-            'foreignKey'   => 'user_id',
-            'dependent'    => false,
-            'conditions'   => '',
-            'fields'       => '',
-            'order'        => '',
-            'limit'        => '',
-            'offset'       => '',
-            'exclusive'    => '',
-            'finderQuery'  => '',
-            'counterQuery' => ''
-        ),
-        'LicensedIndividual' => array (
-            'className'    => 'LicensedIndividual',
-            'foreignKey'   => 'user_id',
-            'dependent'    => false,
-            'conditions'   => '',
-            'fields'       => '',
-            'order'        => '',
-            'limit'        => '',
-            'offset'       => '',
-            'exclusive'    => '',
-            'finderQuery'  => '',
-            'counterQuery' => ''
-        ),
-        'WorkItem'           => array (
-            'className'    => 'WorkItem',
-            'foreignKey'   => 'user_id',
-            'dependent'    => false,
-            'conditions'   => '',
-            'fields'       => '',
-            'order'        => '',
-            'limit'        => '',
-            'offset'       => '',
-            'exclusive'    => '',
-            'finderQuery'  => '',
-            'counterQuery' => ''
-        )
-    );
-*/
     public function beforeSave($options = array ()) {
         $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
         return true;
@@ -153,6 +88,40 @@ class User extends CauthAppModel {
         } else {
             return array ('Group' => array ('id' => $groupId));
         }
+
+    }
+
+
+    public function identitcalpassword() {
+        $return = false;
+        $id     = $this->data['User']['id'];
+        $user   = $this->find('first', array ('conditions' => array ('User.' . $this->primaryKey => $id)));
+        if (!empty($user)) {
+            if ($user['User']['password'] != AuthComponent::password($this->data['User']['password'])) {
+                $return = true;
+            }
+        }
+        return $return;
+    }
+
+    public function cpassword() {
+        $return = false;
+        $id     = $this->data['User']['id'];
+        $user   = $this->find('first', array ('conditions' => array ('User.' . $this->primaryKey => $id)));
+        if (!empty($user)) {
+            if ($user['User']['password'] == AuthComponent::password($this->data['User']['cpassword'])) {
+                $return = true;
+            }
+        }
+        return $return;
+    }
+
+    public function rpassword() {
+        $return = false;
+        if (($this->data['User']['password']) == ($this->data['User']['rpassword'])) {
+            $return = true;
+        }
+        return $return;
 
     }
 
