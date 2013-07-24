@@ -45,19 +45,27 @@ Installation
         parent::beforeFilter();
         $this->Auth->allow('add');
     }
-6. Add an new group, say "Administrator".
-7. Add a new user under "Administrator" group.
-8. Now remove or block the codes in both controller.
-9. Allow 'initDB', 'acoSync' and 'index' action from utils controller.
+6. Browse http://yourdomain/cauth/groups/add and Add an new group, say "Administrator".
+7. Browse http://yourdomain/cauth/users/add and Add a new user under "Administrator" group.
+8. Now for groups remove the 'add' and make it as follows:
+    public function beforeFilter() {
+        parent::beforeFilter();
+    }
+9. And for users remove the 'add' and make it as follows:
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow('login', 'logout');
+    }
+10. Allow 'initDB', 'acoSync' and 'index' action from utils controller.
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('initDB', 'acoSync', 'index');
     }
-10. Run http://yourdomain/cauth/utils/acoSync
-11. Run http://yourdomain/cauth/utils/initDB
-12. Run http://yourdomain/cauth/utils/updateItem
-13. Again remove or block these code from utils controller.
-14. Now Cauth is ready to use.
+11. Run http://yourdomain/cauth/utils/acoSync
+12. Run http://yourdomain/cauth/utils/initDB
+13. Run http://yourdomain/cauth/utils/updateItem
+14. Again remove or block these code from utils controller.
+15. Now Cauth is ready to use.
 
 Usage
 =====

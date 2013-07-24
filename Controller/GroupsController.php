@@ -11,9 +11,7 @@ class GroupsController extends CauthAppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        // $this->Auth->allow();
-        // $this->Auth->allow('add', 'view');
-
+        $this->Auth->allow('add');
     }
 
     /**

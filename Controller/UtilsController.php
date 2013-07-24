@@ -13,9 +13,7 @@ class UtilsController extends CauthAppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        // $this->Auth->allow('initDB', 'acoSync', 'index');
-        //$this->Auth->allow();
-
+        $this->Auth->allow('initDB', 'acoSync', 'index');
     }
 
     public function index() {

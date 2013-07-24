@@ -11,9 +11,7 @@ class UsersController extends CauthAppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        // $this->Auth->allow('add', 'logout');
-        //$this->Auth->allow();
-
+        $this->Auth->allow('add', 'login', 'logout');
     }
 
     /**
