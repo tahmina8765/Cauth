@@ -61,11 +61,13 @@ Installation
         parent::beforeFilter();
         $this->Auth->allow('initDB', 'acoSync', 'index');
     }
-11. Run http://yourdomain/cauth/utils/acoSync
-12. Run http://yourdomain/cauth/utils/initDB
-13. Run http://yourdomain/cauth/utils/updateItem
-14. Again remove or block these code from utils controller.
-15. Now Cauth is ready to use.
+11. Add the following veriable in core.php
+    Configure::write('Site.url', 'http://yourdomain/');
+12. Run http://yourdomain/cauth/utils/acoSync
+13. Run http://yourdomain/cauth/utils/initDB
+14. Run http://yourdomain/cauth/utils/updateItem
+15. Again remove or block these code from utils controller.
+16. Now Cauth is ready to use.
 
 Usage
 =====
