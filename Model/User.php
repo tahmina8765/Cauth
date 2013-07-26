@@ -28,7 +28,7 @@ class User extends CauthAppModel {
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
-            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+            'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
         ),
         'email' => array (
@@ -81,9 +81,9 @@ class User extends CauthAppModel {
     );
 
     public function beforeSave($options = array ()) {
+        if(!empty($this->data['User']['password']))
         $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
         return true;
-
     }
 
     public $actsAs = array ('Acl' => array ('type' => 'requester'));
@@ -102,7 +102,6 @@ class User extends CauthAppModel {
         } else {
             return array ('Group' => array ('id' => $groupId));
         }
-
     }
 
 
@@ -112,6 +111,18 @@ class User extends CauthAppModel {
         $user   = $this->find('first', array ('conditions' => array ('User.' . $this->primaryKey => $id)));
         if (!empty($user)) {
             if ($user['User']['password'] != AuthComponent::password($this->data['User']['password'])) {
+                $return = true;
+            }
+        }
+        return $return;
+    }
+
+    public function matchPasswordChangeCode() {
+        $return = false;
+        $id     = $this->data['User']['id'];
+        $user   = $this->find('first', array ('conditions' => array ('User.' . $this->primaryKey => $id)));
+        if (!empty($user)) {
+            if ($user['User']['password_change_code'] == $this->data['User']['password_change_code']) {
                 $return = true;
             }
         }
@@ -133,6 +144,14 @@ class User extends CauthAppModel {
     public function rpassword() {
         $return = false;
         if (($this->data['User']['password']) == ($this->data['User']['rpassword'])) {
+            $return = true;
+        }
+        return $return;
+
+    }
+    public function usernameOrEmail() {
+        $return = false;
+        if (!empty($this->data['User']['username']) || !empty($this->data['User']['email'])) {
             $return = true;
         }
         return $return;

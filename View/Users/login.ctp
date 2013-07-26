@@ -19,6 +19,9 @@
         echo $this->Form->input('User.username', array ('label' => array ('text'  => 'Login ID', 'class' => 'control-label')));
         echo $this->Form->input('User.password', array ('label' => array ('text'  => 'Password', 'class' => 'control-label')));
         ?>
+        <?php
+        echo $this->html->link('Forget Password', array('plugin' => 'cauth', 'controller' => 'users', 'action' => 'forgetPassword'));
+        ?>
         <div class="control-group">
             <div class="controls">
                 <?php

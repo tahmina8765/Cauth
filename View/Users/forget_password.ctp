@@ -14,16 +14,13 @@
     ?>
 
     <fieldset>
-        <legend><?php echo __('Change Password'); ?></legend>
+        <legend><?php echo __('Forget Password'); ?></legend>
         <?php
-        echo $this->Form->input('id');
-        if (!empty($password_change_code)) {
-            echo $this->Form->input('password_change_code', array ('type'  => 'text', 'label' => 'Password Change Code'));
-        }else{
-            echo $this->Form->input('cpassword', array ('type'  => 'password', 'label' => 'Current Password'));
-        }
-        echo $this->Form->input('password', array ('label' => 'New Password'));
-        echo $this->Form->input('rpassword', array ('type'  => 'password', 'label' => 'Re-type Password'));
+        echo $this->Form->input('username');
+        ?>
+        <div style="text-align: center;"><strong>OR</strong></div>
+        <?php
+        echo $this->Form->input('email', array('type' => 'email', 'label' => 'Email'));
         ?>
     </fieldset>
     <div class="control-group">
