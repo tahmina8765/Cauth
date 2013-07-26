@@ -5,6 +5,7 @@
             <tr>
                 <th><?php echo $this->Paginator->sort('id'); ?></th>
                 <th><?php echo $this->Paginator->sort('username'); ?></th>
+                <th><?php echo $this->Paginator->sort('email'); ?></th>
                 <th><?php echo $this->Paginator->sort('group_id'); ?></th>
                 <th><?php echo $this->Paginator->sort('created'); ?></th>
                 <th><?php echo $this->Paginator->sort('modified'); ?></th>
@@ -16,6 +17,7 @@
                 <tr>
                     <td><?php echo h($user['User']['id']); ?>&nbsp;</td>
                     <td><?php echo h($user['User']['username']); ?>&nbsp;</td>
+                    <td><?php echo h($user['User']['email']); ?>&nbsp;</td>
                     <td>
                         <?php echo $this->Html->link($user['Group']['name'], array ('plugin'     => 'cauth', 'controller' => 'groups', 'action'     => 'view', $user['Group']['id'])); ?>
                     </td>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2013 at 03:47 PM
+-- Generation Time: Jul 26, 2013 at 03:40 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `c6ecsrc2`
+-- Database: `cauthdb`
 --
 
 -- --------------------------------------------------------
@@ -27,6 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `acos`
 --
 
+DROP TABLE IF EXISTS `acos`;
 CREATE TABLE IF NOT EXISTS `acos` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `parent_id` int(10) DEFAULT NULL,
@@ -44,6 +45,7 @@ CREATE TABLE IF NOT EXISTS `acos` (
 -- Table structure for table `aros`
 --
 
+DROP TABLE IF EXISTS `aros`;
 CREATE TABLE IF NOT EXISTS `aros` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `parent_id` int(10) DEFAULT NULL,
@@ -61,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `aros` (
 -- Table structure for table `aros_acos`
 --
 
+DROP TABLE IF EXISTS `aros_acos`;
 CREATE TABLE IF NOT EXISTS `aros_acos` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `aro_id` int(10) NOT NULL,
@@ -79,6 +82,7 @@ CREATE TABLE IF NOT EXISTS `aros_acos` (
 -- Table structure for table `cauth_categories`
 --
 
+DROP TABLE IF EXISTS `cauth_categories`;
 CREATE TABLE IF NOT EXISTS `cauth_categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(500) NOT NULL,
@@ -93,6 +97,7 @@ CREATE TABLE IF NOT EXISTS `cauth_categories` (
 -- Table structure for table `cauth_items`
 --
 
+DROP TABLE IF EXISTS `cauth_items`;
 CREATE TABLE IF NOT EXISTS `cauth_items` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(500) DEFAULT NULL,
@@ -111,6 +116,7 @@ CREATE TABLE IF NOT EXISTS `cauth_items` (
 -- Table structure for table `groups`
 --
 
+DROP TABLE IF EXISTS `groups`;
 CREATE TABLE IF NOT EXISTS `groups` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -126,15 +132,18 @@ CREATE TABLE IF NOT EXISTS `groups` (
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
+  `email` varchar(500) NOT NULL,
   `password` char(40) NOT NULL,
   `group_id` int(11) NOT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 SET FOREIGN_KEY_CHECKS=1;
 

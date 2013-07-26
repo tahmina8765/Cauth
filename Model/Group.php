@@ -9,7 +9,7 @@ App::uses('CauthAppModel', 'Cauth.Model');
  */
 class Group extends CauthAppModel {
 
-    public $useTable = 'cauth_groups';
+    public $useTable = 'groups';
 
 
     /**
