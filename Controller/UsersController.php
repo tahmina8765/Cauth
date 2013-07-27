@@ -224,6 +224,10 @@ class UsersController extends CauthAppController {
 
     }
 
+    /**
+     * forgetPassword
+     */
+
     public function forgetPassword() {
         $this->User->validate['username'] = array (
             'notempty'        => array (
